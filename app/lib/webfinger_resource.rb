@@ -4,6 +4,7 @@ class WebfingerResource
   attr_reader :resource
 
   def initialize(resource)
+    resource = resource.sub('@xn--uiq.', '@丼.')
     @resource = resource
   end
 

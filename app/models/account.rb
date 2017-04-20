@@ -141,6 +141,7 @@ class Account < ApplicationRecord
   end
 
   def subscription(webhook_url)
+    webhook_url = webhook_url.sub('丼.', 'xn--uiq.')
     OStatus2::Subscription.new(remote_url, secret: secret, lease_seconds: 86_400 * 30, webhook: webhook_url, hub: hub_url)
   end
 

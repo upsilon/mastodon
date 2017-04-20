@@ -57,10 +57,12 @@ class TagManager
   end
 
   def web_domain?(domain)
+    domain = domain.sub('xn--uiq.', '丼.')
     domain.nil? || domain.gsub(/[\/]/, '').casecmp(Rails.configuration.x.web_domain).zero?
   end
 
   def local_domain?(domain)
+    domain = domain.sub('xn--uiq.', '丼.')
     domain.nil? || domain.gsub(/[\/]/, '').casecmp(Rails.configuration.x.local_domain).zero?
   end
 

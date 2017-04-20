@@ -14,10 +14,13 @@ class Pubsubhubbub::ConfirmationWorker
     subscription.lease_seconds = lease_seconds
     subscription.confirmed     = true
 
+    topic = account_url(subscription.account, format: :atom)
+    topic = topic.sub('丼.', 'xn--uiq.')
+
     response = HTTP.headers(user_agent: 'Mastodon/PubSubHubbub')
                    .timeout(:per_operation, write: 20, connect: 20, read: 50)
                    .get(subscription.callback_url, params: {
-                          'hub.topic' => account_url(subscription.account, format: :atom),
+                          'hub.topic' => topic,
                           'hub.mode'          => mode,
                           'hub.challenge'     => challenge,
                           'hub.lease_seconds' => subscription.lease_seconds,
